@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TextQuest</string>
+    <string name="headText">Остаться в живых</string>
+    <string name="headText2">Текстовый квест</string>
+    <string name="buttonName">Начать</string>
+    <string name="island_image">island_image</string>
+    <string name="scene1_text_1">...</string>
 </resources>

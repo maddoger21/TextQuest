@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#00A8A8</color>
+    <color name="background_for_text">#CC292828</color>
+    <color name="energy_color">#8BB0BF</color>
+    <color name="hungry_color">#798E54</color>
+    <color name="health_color">#BC7676</color>
+    <color name="name_color">#B5B5B5</color>
+    <color name="background_color">#E6D6F5FB</color>
 </resources>

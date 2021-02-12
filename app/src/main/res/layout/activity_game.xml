@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:onClick="nextText"
+    android:orientation="vertical"
+    tools:context=".activities.GameActivity">
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="356dp"
+        android:layout_height="636dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/island_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/main_pic" />
+
+    <TextView
+        android:id="@+id/tv_game"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:background="@color/background_for_text"
+        android:padding="5dp"
+        android:text="@string/scene1_text_1"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_background"
+        app:layout_constraintEnd_toEndOf="@+id/iv_background"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_background" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/name_color"
+        android:padding="3sp"
+        android:text="Имя: "
+        app:layout_constraintStart_toStartOf="@+id/iv_background"
+        app:layout_constraintTop_toBottomOf="@+id/tv_health" />
+
+    <TextView
+        android:id="@+id/tv_health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/health_color"
+        android:padding="3sp"
+        android:text="Здоровье: 0"
+        app:layout_constraintStart_toStartOf="@+id/iv_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_background" />
+
+    <TextView
+        android:id="@+id/tv_energy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/energy_color"
+        android:padding="3sp"
+        android:text="Энергия: 0"
+        app:layout_constraintStart_toEndOf="@+id/tv_health"
+        app:layout_constraintTop_toTopOf="@+id/iv_background" />
+
+    <TextView
+        android:id="@+id/tv_hungry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/hungry_color"
+        android:padding="3sp"
+        android:text="Голод: 0"
+        app:layout_constraintStart_toEndOf="@+id/tv_energy"
+        app:layout_constraintTop_toTopOf="@+id/iv_background" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="313dp"
+        android:layout_height="224dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/iv_background"
+        app:layout_constraintStart_toStartOf="@+id/iv_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_background">
+
+        <TextView
+            android:id="@+id/tv_direction1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:onClick="nextText"
+            android:gravity="center"
+            android:text=""
+            android:textSize="33dp" />
+
+        <TextView
+            android:id="@+id/tv_direction2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:gravity="center"
+            android:onClick="nextText"
+            android:text=""
+            android:textSize="33dp" />
+
+        <TextView
+            android:id="@+id/tv_direction3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:gravity="center"
+            android:onClick="nextText"
+            android:text=""
+            android:textSize="33dp" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_enter_text"
+        android:layout_width="253dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/background_color"
+        android:gravity="center"
+        android:hint="Как же вас зовут? \n(Введите имя)"
+        app:layout_constraintEnd_toEndOf="@+id/iv_background"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/iv_background"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
