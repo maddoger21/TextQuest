@@ -1,28 +1,21 @@
 package ru.samsung.itschool.textquest.classes;
 
 public class Character {
-    private String name;
-    private int health;
-    private int energy;
-    private int hungry;
-    private int score;
+    private static Character character;
+    private static int health = 0;
+    private static int energy = 0;
+    private static int hungry = 0;
 
-    public Character(){
-        this.health = 0;
-        this.energy = 0;
-        this.hungry = 0;
-        this.score = 0;
-    }
-    public int getScore() {
-        return score;
+    private Character() {
+
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+    public static Character getCharacter(){
+        if (character == null){
+            character = new Character();
+        }
 
-    public String getName() {
-        return name;
+        return character;
     }
 
     public int getEnergy() {
@@ -37,10 +30,6 @@ public class Character {
         return health;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setEnergy(int energy) {
         this.energy = energy;
     }
@@ -51,4 +40,5 @@ public class Character {
     public void setHealth(int health) {
         this.health = health;
     }
+
 }

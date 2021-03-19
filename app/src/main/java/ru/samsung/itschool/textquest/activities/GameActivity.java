@@ -4,40 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ru.samsung.itschool.textquest.R;
 import ru.samsung.itschool.textquest.classes.Character;
-import ru.samsung.itschool.textquest.classes.Story;
+import ru.samsung.itschool.textquest.classes.ISituation;
+import ru.samsung.itschool.textquest.classes.ISituationFactory;
+import ru.samsung.itschool.textquest.classes.Sit1Factory;
+import ru.samsung.itschool.textquest.classes.Sit2Factory;
+import ru.samsung.itschool.textquest.classes.SitEndFactory;
 
 public class GameActivity extends AppCompatActivity {
-
-    private int sceneNum = 0;
+    private int sceneDirection1,sceneDirection2,sceneDirection3;
+    private int sceneNum = 1;
     private TextView textGame;
-    private TextView textName;
     private TextView textHealth;
     private TextView textEnergy;
     private TextView textHungry;
     private TextView direction1;
     private TextView direction2;
     private TextView direction3;
-    private Story story;
-    private Character player;
-    private String name;
-    private EditText textEnter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
 
         textGame = findViewById(R.id.tv_game);
-        textEnter = findViewById(R.id.et_enter_text);
-        textName = findViewById(R.id.tv_name);
         textHealth = findViewById(R.id.tv_health);
         textEnergy = findViewById(R.id.tv_energy);
         textHungry = findViewById(R.id.tv_hungry);
@@ -45,102 +39,67 @@ public class GameActivity extends AppCompatActivity {
         direction2 = findViewById(R.id.tv_direction2);
         direction3 = findViewById(R.id.tv_direction3);
 
-        story = new Story();
-        player = new Character();
-        //отображаем текст нулевой сцены
-        textGame.setText(story.currentScene.getText());
-        //делаем EditText для имени невидимиым
-        textEnter.setVisibility(View.INVISIBLE);
-        //заносим в БД пустое имя персонажа
-        player.setName("");
+        update();
+
+        direction1.setOnClickListener(listener);
+        direction2.setOnClickListener(listener);
+        direction3.setOnClickListener(listener);
+    }
+    //обработка кнопок
+
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.tv_direction1:
+                    sceneNum = sceneDirection1;
+                    update();
+                    break;
+                case R.id.tv_direction2:
+                    sceneNum = sceneDirection2;
+                    update();
+                    break;
+                case R.id.tv_direction3:
+                    sceneNum = sceneDirection3;
+                    update();
+                    break;
+            }
+        }
+    };
+
+
+    static ISituationFactory createSituationByNum(int SceneNum) {
+        switch (SceneNum){
+            case 1: return new Sit1Factory();
+            case 2: return new Sit2Factory();
+//            case 3: return new Sit3Factory();
+//            case 4: return new Sit4Factory();
+//            case 5: return new Sit5Factory();
+//            case 6: return new Sit6Factory();
+//            case 7: return new Sit7Factory();
+            default: return new SitEndFactory();
+        }
 
     }
-    //Если есть варианты ответа
-    public void nextText(View view) {
-        int id = view.getId();
-        switch (id){
-            //Если есть варианты ответа
-            //direction1
-            case R.id.tv_direction1:
-                player.setHealth(player.getHealth()+story.currentScene.direction[0].getdHealth());
-                player.setEnergy(player.getEnergy()+story.currentScene.direction[0].getdEnergy());
-                player.setHungry(player.getHungry()+story.currentScene.direction[0].getdHungry());
-                sceneNum++;
-                story.go(sceneNum);
-                textGame.setText(story.currentScene.getText());
-                break;
-            //direction2
-            case R.id.tv_direction2:
-                player.setHealth(player.getHealth()+story.currentScene.direction[1].getdHealth());
-                player.setEnergy(player.getEnergy()+story.currentScene.direction[1].getdEnergy());
-                player.setHungry(player.getHungry()+story.currentScene.direction[1].getdHungry());
-                sceneNum++;
-                story.go(sceneNum);
-                textGame.setText(story.currentScene.getText());
-                break;
-            //direction3
-            case R.id.tv_direction3:
-                player.setHealth(player.getHealth()+story.currentScene.direction[2].getdHealth());
-                player.setEnergy(player.getEnergy()+story.currentScene.direction[2].getdEnergy());
-                player.setHungry(player.getHungry()+story.currentScene.direction[2].getdHungry());
-                sceneNum++;
-                story.go(sceneNum);
-                textGame.setText(story.currentScene.getText());
-                break;
-            //нету вариантов выбора
-            default:
-                if (sceneNum == 1 && textEnter.length() == 0){
-                    textEnter.setVisibility(View.VISIBLE);
-                    Toast.makeText(this,"Введите имя!",Toast.LENGTH_SHORT).show();
-                }
-                //выполняется всегда кроме 1 сцены с вводом имени или когда есть варианты ответа
-                else {
-                    player.setHealth(player.getHealth()+story.currentScene.getdHealth());
-                    player.setEnergy(player.getEnergy()+story.currentScene.getdEnergy());
-                    player.setHungry(player.getHungry()+story.currentScene.getdHungry());
 
-                    textEnter.setVisibility(View.INVISIBLE);
+    public void update(){
+        ISituationFactory situationFactory = createSituationByNum(sceneNum);
+        ISituation scene = situationFactory.Create();
 
-                    sceneNum++;
-                    story.go(sceneNum);
-                    textGame.setText(story.currentScene.getText());
-                }
-        }
+        sceneDirection1 = scene.getSceneDirection1();
+        sceneDirection2 = scene.getSceneDirection2();
+        sceneDirection3 = scene.getSceneDirection3();
 
-        //Добавление имени в базу данных
-        player.setName(textEnter.getText().toString());
-        //Отображение вариантов ответа
-        if (story.currentScene.getVariants() == 3){
-            direction1.setText(story.currentScene.direction[0].getText());
-            direction1.setBackgroundResource(R.color.background_color);
-            direction2.setText(story.currentScene.direction[1].getText());
-            direction2.setBackgroundResource(R.color.background_color);
-            direction3.setText(story.currentScene.direction[2].getText());
-            direction3.setBackgroundResource(R.color.background_color);
-        }
-        else if (story.currentScene.getVariants() == 2){
-            direction1.setText(story.currentScene.direction[0].getText());
-            direction1.setBackgroundResource(R.color.background_color);
-            direction2.setText(story.currentScene.direction[1].getText());
-            direction2.setBackgroundResource(R.color.background_color);
-        }
-        else if (story.currentScene.getVariants() == 1){
-            direction1.setText(story.currentScene.direction[0].getText());
-            direction1.setBackgroundResource(R.color.background_color);
-        }
-        else {
-            direction1.setText("");
-            direction1.setBackgroundResource(0);
-            direction2.setText("");
-            direction2.setBackgroundResource(0);
-            direction3.setText("");
-            direction3.setBackgroundResource(0);
-        }
+        Character.getCharacter().setHungry(scene.getHungry());
+        Character.getCharacter().setEnergy(scene.getEnergy());
+        Character.getCharacter().setHealth(scene.getHealth());
 
-        //обновление параметров персонажа
-        textName.setText("Имя: " + player.getName());
-        textHealth.setText("Здоровье: " + player.getHealth());
-        textEnergy.setText("Энергия: " + player.getEnergy());
-        textHungry.setText("Голод: " + player.getHungry());
+        textGame.setText(scene.getText());
+        textHealth.setText("Здоровье: " + Integer.toString(Character.getCharacter().getHealth()));
+        textEnergy.setText("Энергия: " + Integer.toString(Character.getCharacter().getEnergy()));
+        textHungry.setText("Голод: " + Integer.toString(Character.getCharacter().getHungry()));
+        direction1.setText(scene.getButton1());
+        direction2.setText(scene.getButton2());
+        direction3.setText(scene.getButton3());
     }
 }
