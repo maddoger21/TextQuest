@@ -1,13 +1,13 @@
 package ru.samsung.itschool.textquest.classes;
 
-public class Situation2 implements ISituation{
+public class Situation3 implements ISituation{
     public static int sceneDirection1 = 5;
     public static int sceneDirection2 = 5;
     public static int sceneDirection3 = 5;
     public static int health = 100;
     public static int energy = 100;
     public static int hungry = 100;
-    public static String text = "Вы провели весь день, осмотривая обломки, но так ничего и не нашли. В итоге, с чувством скорби и безнадежности вы засыпаете на берегу";
+    public static String text = "Вы были счастливы, что выжили, но на смену исступленной радости приходят скорбь по погибшим товарищам, муки голода и холода и страх перед дикими зверями. Первую ночь вы проводите на дереве";
     public static String b1 = "Спать";
     public static String b2 = "Спать";
     public static String b3 = "Спать";

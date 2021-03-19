@@ -1,16 +1,16 @@
 package ru.samsung.itschool.textquest.classes;
 
-public class Situation2 implements ISituation{
-    public static int sceneDirection1 = 5;
-    public static int sceneDirection2 = 5;
-    public static int sceneDirection3 = 5;
+public class Situation5 implements ISituation{
+    public static int sceneDirection1 = 6;
+    public static int sceneDirection2 = 7;
+    public static int sceneDirection3 = 8;
     public static int health = 100;
-    public static int energy = 100;
-    public static int hungry = 100;
-    public static String text = "Вы провели весь день, осмотривая обломки, но так ничего и не нашли. В итоге, с чувством скорби и безнадежности вы засыпаете на берегу";
-    public static String b1 = "Спать";
-    public static String b2 = "Спать";
-    public static String b3 = "Спать";
+    public static int energy = 40;
+    public static int hungry = 40;
+    public static String text = "К утру прилив пригнал ваш корабль близко к берегу.";
+    public static String b1 = "Вплавь добирается до него";
+    public static String b2 = "Все же решили сначала обойти остров";
+    public static String b3 = "Лежать на земле и рыдать";
 
     @Override
     public String getText() {

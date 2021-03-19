@@ -12,6 +12,9 @@ import ru.samsung.itschool.textquest.classes.ISituation;
 import ru.samsung.itschool.textquest.classes.ISituationFactory;
 import ru.samsung.itschool.textquest.classes.Sit1Factory;
 import ru.samsung.itschool.textquest.classes.Sit2Factory;
+import ru.samsung.itschool.textquest.classes.Sit3Factory;
+import ru.samsung.itschool.textquest.classes.Sit4Factory;
+import ru.samsung.itschool.textquest.classes.Sit5Factory;
 import ru.samsung.itschool.textquest.classes.SitEndFactory;
 
 public class GameActivity extends AppCompatActivity {
@@ -72,9 +75,9 @@ public class GameActivity extends AppCompatActivity {
         switch (SceneNum){
             case 1: return new Sit1Factory();
             case 2: return new Sit2Factory();
-//            case 3: return new Sit3Factory();
-//            case 4: return new Sit4Factory();
-//            case 5: return new Sit5Factory();
+            case 3: return new Sit3Factory();
+            case 4: return new Sit4Factory();
+            case 5: return new Sit5Factory();
 //            case 6: return new Sit6Factory();
 //            case 7: return new Sit7Factory();
             default: return new SitEndFactory();
